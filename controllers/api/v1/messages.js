@@ -1,7 +1,7 @@
 const Message = require('../../../models/api/v1/message');
 
 const getAll = (req, res, next) => {
-    IMDMessage.find((err, docs) => {
+    Message.find((err, docs) => {
         if (!err) {
             res.json({
                 "status": "success",
