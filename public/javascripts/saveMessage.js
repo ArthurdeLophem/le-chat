@@ -15,7 +15,18 @@ document.querySelector('.btn').addEventListener('click', (e) => {
         })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
+                console.log(data.data.messages)
+                const msgData = data.data.messages;
+                let message = document.createElement("div");
+                let username = document.createElement("h2");
+                let msgtext = document.createElement("p");
+                message.classList.add("messageBlock");
+                msgtext.innerHTML = msgData.message;
+                username.innerHTML = msgData.username;
+                message.appendChild(username);
+                message.appendChild(msgtext);
+                let msgList = document.querySelector(".messageList");
+                msgList.appendChild(message);
             }
             );
 
