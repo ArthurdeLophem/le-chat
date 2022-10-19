@@ -14,6 +14,26 @@ const getAll = (req, res, next) => {
     });
 }
 
+const getByUser = (req, res, next) => {
+    try {
+        const username = req.params.username;
+        Message.find({ username: username }, (err, docs) => {
+            if (!err) {
+                res.json({
+                    "status": "success",
+                    "message": "getting messages",
+                    "data": {
+                        "messages": docs
+                    }
+                });
+            }
+        })
+    } catch (error) {
+        res.send(error)
+    }
+
+}
+
 const getById = async (req, res, next) => {
     try {
         const message = await Message.findById(req.params.id);
@@ -65,6 +85,7 @@ const create = (req, res, next) => {
 }
 
 module.exports.getAll = getAll;
+module.exports.getByUser = getByUser;
 module.exports.getById = getById;
 module.exports.updateMessage = updateMessage;
 module.exports.create = create;

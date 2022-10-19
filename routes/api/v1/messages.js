@@ -11,4 +11,6 @@ router.get('/:id', messageController.getById);
 
 router.put('/:id', messageController.updateMessage);
 
+router.get('/user/:username', messageController.getByUser);
+
 module.exports = router;
