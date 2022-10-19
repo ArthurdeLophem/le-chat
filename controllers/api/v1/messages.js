@@ -1,8 +1,22 @@
 const Message = require('../../../models/api/v1/message');
 
+const getAll = (req, res, next) => {
+    IMDMessage.find((err, docs) => {
+        if (!err) {
+            res.json({
+                "status": "success",
+                "message": "getting messages",
+                "data": {
+                    "messages": docs
+                }
+            });
+        }
+    });
+}
+
 const create = (req, res, next) => {
     let message = new Message();
-    message.user = req.body.user;
+    message.username = req.body.username;
     message.message = req.body.message;
     message.save((err, doc) => {
         if (err) {
@@ -23,4 +37,5 @@ const create = (req, res, next) => {
     })
 }
 
+module.exports.getAll = getAll;
 module.exports.create = create;
