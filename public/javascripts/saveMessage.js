@@ -1,9 +1,10 @@
 document.querySelector('.btn').addEventListener('click', (e) => {
-    text = document.querySelector('.input').value
-    if (text !== "") {
-        console.log(text)
+    text = document.querySelector('.message').value
+    username = document.querySelector('.username').value
+    if (text !== "" && username !== "") {
+        //console.log(text)
         const message = {
-            username: 'Elon Musk',
+            username: username,
             message: text
         }
         fetch('http://localhost:3000/api/v1/messages', {
