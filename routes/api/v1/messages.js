@@ -7,4 +7,6 @@ router.get('/', messageController.getAll);
 
 router.post('/', messageController.create);
 
+router.get('/:id', messageController.getById);
+
 module.exports = router;

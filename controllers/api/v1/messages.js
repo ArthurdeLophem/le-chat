@@ -14,6 +14,15 @@ const getAll = (req, res, next) => {
     });
 }
 
+const getById = async (req, res, next) => {
+    try {
+        const message = await Message.findById(req.params.id);
+        res.json(message);
+    } catch (error) {
+        res.send(error)
+    }
+}
+
 const create = (req, res, next) => {
     let message = new Message();
     message.username = req.body.username;
@@ -38,4 +47,5 @@ const create = (req, res, next) => {
 }
 
 module.exports.getAll = getAll;
+module.exports.getById = getById;
 module.exports.create = create;
