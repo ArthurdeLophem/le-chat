@@ -23,6 +23,24 @@ const getById = async (req, res, next) => {
     }
 }
 
+const updateMessage = (req, res, next) => {
+    try {
+        let update = { message: req.body.message };
+        let filter = req.params.id;
+        Message.findByIdAndUpdate(filter, update,
+            function (err, docs) {
+                if (err) {
+                    res.send(err)
+                }
+                else {
+                    res.send({ "updated message": docs });
+                }
+            });
+    } catch (error) {
+        res.send(error)
+    }
+}
+
 const create = (req, res, next) => {
     let message = new Message();
     message.username = req.body.username;
@@ -48,4 +66,5 @@ const create = (req, res, next) => {
 
 module.exports.getAll = getAll;
 module.exports.getById = getById;
+module.exports.updateMessage = updateMessage;
 module.exports.create = create;
