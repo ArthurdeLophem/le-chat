@@ -63,14 +63,12 @@ const updateMessage = (req, res, next) => {
 
 const deleteMessage = (req, res, next) => {
     try {
-        let filter = req.params.id;
-        Message.findOneAndDelete(filter, (err, docs) => {
+        Message.deleteOne({ _id: req.params.id }, (err, docs) => {
             if (err) {
                 res.send(err)
             }
             else {
-                console.log(docs)
-                res.send({ "deleted message": docs });
+                res.send("deleted message n° " + req.params.id + " succesfully");
             }
         })
     } catch (error) {
