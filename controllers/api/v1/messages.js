@@ -61,6 +61,23 @@ const updateMessage = (req, res, next) => {
     }
 }
 
+const deleteMessage = (req, res, next) => {
+    try {
+        let filter = req.params.id;
+        Message.findOneAndDelete(filter, (err, docs) => {
+            if (err) {
+                res.send(err)
+            }
+            else {
+                console.log(docs)
+                res.send({ "deleted message": docs });
+            }
+        })
+    } catch (error) {
+        res.send(error)
+    }
+}
+
 const create = (req, res, next) => {
     let message = new Message();
     message.username = req.body.username;
@@ -88,4 +105,5 @@ module.exports.getAll = getAll;
 module.exports.getByUser = getByUser;
 module.exports.getById = getById;
 module.exports.updateMessage = updateMessage;
+module.exports.deleteMessage = deleteMessage;
 module.exports.create = create;

@@ -1,17 +1,18 @@
 var express = require('express');
 var router = express.Router();
 const messageController = require('../../../controllers/api/v1/messages');
-const cors = require('cors');
 
 /* GET users listing. */
-router.get('/', cors(), messageController.getAll);
+router.get('/', messageController.getAll);
 
-router.post('/', cors(), messageController.create);
+router.post('/', messageController.create);
 
-router.get('/:id', cors(), messageController.getById);
+router.get('/:id', messageController.getById);
 
-router.put('/:id', cors(), messageController.updateMessage);
+router.put('/:id', messageController.updateMessage);
 
-router.get('/user/:username', cors(), messageController.getByUser);
+router.delete('/:id', messageController.deleteMessage);
+
+router.get('/user/:username', messageController.getByUser);
 
 module.exports = router;
