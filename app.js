@@ -2,13 +2,14 @@ const createError = require('http-errors');
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const config = require('config');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
 const indexRouter = require('./routes/api/v1/index');
 const messageRouter = require('./routes/api/v1/messages');
 
-mongoose.connect('mongodb://localhost/donunqMessages')
+mongoose.connect("mongodb://localhost/donunqMessages");
 
 const app = express();
 
