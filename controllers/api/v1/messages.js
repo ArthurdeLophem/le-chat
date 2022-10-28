@@ -104,21 +104,30 @@ const getById = async (req, res, next) => {
 }
 
 const updateMessage = (req, res, next) => {
-    try {
-        let update = { message: req.body.message };
-        let filter = req.params.id;
-        Message.findByIdAndUpdate(filter, update,
-            function (err, docs) {
-                if (err) {
-                    res.send(err)
-                }
-                else {
-                    res.send({ "updated message": docs });
-                }
-            });
-    } catch (error) {
-        res.send(error)
-    }
+    // try {
+    //     let update = { message: req.body.message };
+    //     let filter = req.params.id;
+    //     Message.findByIdAndUpdate(filter, update,
+    //         function (err, docs) {
+    //             if (err) {
+    //                 res.send(err)
+    //             }
+    //             else {
+    //                 res.send({ "updated message": docs });
+    //             }
+    //         });
+    // } catch (error) {
+    //     res.send(error)
+    // }
+    message = messages.find(element => element.id == req.params.id);
+    message.message = "new messaged";
+    res.json({
+        status: "success",
+        message: "succesfully updated message n°" + req.params.id,
+        data: {
+            messages: message
+        }
+    });
 }
 
 const deleteMessage = (req, res, next) => {
