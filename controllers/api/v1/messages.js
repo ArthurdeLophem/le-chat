@@ -131,18 +131,33 @@ const updateMessage = (req, res, next) => {
 }
 
 const deleteMessage = (req, res, next) => {
-    try {
-        Message.deleteOne({ _id: req.params.id }, (err, docs) => {
-            if (err) {
-                res.send(err)
-            }
-            else {
-                res.send("deleted message n° " + req.params.id + " succesfully");
-            }
-        })
-    } catch (error) {
-        res.send(error)
-    }
+    // try {
+    //     Message.deleteOne({ _id: req.params.id }, (err, docs) => {
+    //         if (err) {
+    //             res.send(err)
+    //         }
+    //         else {
+    //             res.send("deleted message n° " + req.params.id + " succesfully");
+    //         }
+    //     })
+    // } catch (error) {
+    //     res.send(error)
+    // }
+    message = [];
+
+    messages.filter((element) => {
+        if (element.id == req.params.id) {
+            console.log(element.id)
+        } else {
+            message.push(element)
+        }
+    });
+
+    res.json({
+        status: "success",
+        message: "succesfully deleted message n°" + req.params.id,
+        remainingMessages: message.length
+    });
 }
 
 const create = (req, res, next) => {
