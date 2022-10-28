@@ -1,46 +1,106 @@
-const Message = require('../../../models/api/v1/message');
+const { response } = require("express");
+let message = []
+// const Message = require('../../../models/api/v1/message');
+const messages =
+    [
+        {
+            id: 911,
+            message: "pineapple belongs on pizza",
+            username: "elon musk"
+        },
+        {
+            id: 912,
+            message: "pizza belongs on pineapple",
+            username: "elon musk"
+        },
+        {
+            id: 913,
+            message: "pizza belongs on pizza",
+            username: "elon musk"
+        },
+        {
+            id: 914,
+            message: "pineapple belongs",
+            username: "elon musk"
+        },
+        {
+            id: 915,
+            message: "pineapple belongs",
+            username: "pikachu"
+        }
+    ]
 
 const getAll = (req, res, next) => {
-    Message.find((err, docs) => {
-        if (!err) {
-            res.json({
-                "status": "success",
-                "message": "getting messages",
-                "data": {
-                    "messages": docs
-                }
-            });
+    // Message.find((err, docs) => {
+    //     if (!err) {
+    //         res.json({
+    //             "status": "success",
+    //             "message": "getting messages",
+    //             "data": {
+    //                 "messages": docs
+    //             }
+    //         });
+    //     }
+    // });
+    res.json({
+        status: "success",
+        message: "getting messages",
+        data: {
+            messages: messages
         }
     });
 }
 
 const getByUser = (req, res, next) => {
-    try {
-        const username = req.params.username;
-        Message.find({ username: username }, (err, docs) => {
-            if (!err) {
-                res.json({
-                    "status": "success",
-                    "message": "getting messages",
-                    "data": {
-                        "messages": docs
-                    }
-                });
-            }
-        })
-    } catch (error) {
-        res.send(error)
-    }
-
+    // try {
+    //     const username = req.params.username;
+    //     Message.find({ username: username }, (err, docs) => {
+    //         if (!err) {
+    //             res.json({
+    //                 "status": "success",
+    //                 "message": "getting messages",
+    //                 "data": {
+    //                     "messages": docs
+    //                 }
+    //             });
+    //         }
+    //     })
+    // } catch (error) {
+    //     res.send(error)
+    // }
+    message = [];
+    messages.forEach(element => {
+        console.log(element.username, req.params.username)
+        if (element.username == req.params.username) {
+            message.push(element);
+        }
+    });
+    console.log(message);
+    res.json({
+        status: "success",
+        message: "getting messages for" + req.params.username,
+        data: {
+            messages: message
+        }
+    });
 }
 
 const getById = async (req, res, next) => {
-    try {
-        const message = await Message.findById(req.params.id);
-        res.json(message);
-    } catch (error) {
-        res.send(error)
-    }
+    // try {
+    //     const message = await Message.findById();
+    //     res.json(message);
+    // } catch (error) {
+    //     res.send(error)
+    // }
+    message = [];
+    message = messages.find(element => element.id == req.params.id);
+    res.json({
+        status: "success",
+        message: "getting messages",
+        data: {
+            messages: message
+        }
+    });
 }
 
 const updateMessage = (req, res, next) => {
