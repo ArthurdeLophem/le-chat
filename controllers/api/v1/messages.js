@@ -161,25 +161,39 @@ const deleteMessage = (req, res, next) => {
 }
 
 const create = (req, res, next) => {
-    let message = new Message();
-    message.username = req.body.username;
-    message.message = req.body.message;
-    message.save((err, doc) => {
-        if (err) {
-            res.json({
-                "status": "error",
-                "message": "cannot create message",
-            })
-        }
-        if (!err) {
-            res.json({
-                "status": "success",
-                "message": "created a new message",
-                "data": {
-                    "messages": doc
-                },
-            })
-        }
+    // let message = new Message();
+    // message.username = req.body.username;
+    // message.message = req.body.message;
+    // message.save((err, doc) => {
+    //     if (err) {
+    //         res.json({
+    //             "status": "error",
+    //             "message": "cannot create message",
+    //         })
+    //     }
+    //     if (!err) {
+    //         res.json({
+    //             "status": "success",
+    //             "message": "created a new message",
+    //             "data": {
+    //                 "messages": doc
+    //             },
+    //         })
+    //     }
+    // })
+    const newMessage = {
+        id: 916,
+        message: "this isn't pizza, its a donunq",
+        username: "bad cop"
+    }
+    messages.push(newMessage)
+    console.log(messages)
+    res.json({
+        status: "success",
+        message: "created a new message",
+        data: {
+            message: newMessage
+        },
     })
 }
 
