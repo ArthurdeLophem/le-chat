@@ -42,6 +42,7 @@ const getAll = (req, res, next) => {
     //         });
     //     }
     // });
+    messages.length = 5;
     res.json({
         status: "success",
         message: "getting messages",
@@ -119,6 +120,7 @@ const updateMessage = (req, res, next) => {
     // } catch (error) {
     //     res.send(error)
     // }
+    message = [];
     message = messages.find(element => element.id == req.params.id);
     message.message = "new messaged";
     res.json({
@@ -144,7 +146,6 @@ const deleteMessage = (req, res, next) => {
     //     res.send(error)
     // }
     message = [];
-
     messages.filter((element) => {
         if (element.id == req.params.id) {
             console.log(element.id)
@@ -152,7 +153,6 @@ const deleteMessage = (req, res, next) => {
             message.push(element)
         }
     });
-
     res.json({
         status: "success",
         message: "succesfully deleted message n°" + req.params.id,
